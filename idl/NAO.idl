@@ -1,0 +1,113 @@
+
+
+module ssr {
+
+  struct ActuatorPosition {
+    string name;
+    float position; // [rad]
+  };
+
+  typedef sequence<ActuatorPosition> ActuatorPositionSeq;
+
+
+  struct ActuatorPositionArray {
+    ActuatorPositionSeq data;
+    float fractionSpeed;
+  };
+
+  struct StringArray {
+    sequence<string> data;
+  };
+
+  struct FloatArray {
+    sequence<float> data;
+  };
+
+  struct BoolArray {
+    sequence<boolean> data;
+  };
+
+  struct LongArray {
+    sequence<long> data;
+  };
+
+  interface ALMotion {
+    void setAngles(in StringArray name, in FloatArray value, in float fractionSpeed);
+    FloatArray getAngles(in StringArray name, in boolean useSensors);
+    void openHand(in string name);
+    void closeHand(in string name);
+    
+    void setStiffness(in StringArray name, in FloatArray stiffnesses);
+    FloatArray getStiffness(in StringArray name);
+
+    void rest();
+    void wakeUp();
+
+    void moveTo(in float x, in float y, in float theta);
+    void moveToward(in float vx, in float vy, in float vtheta);
+    FloatArray getRobotPosition();
+    FloatArray getRobotVelocity();
+    void stopMove();
+    boolean moveIsActive();
+    void waitUntilMoveIsFinished();
+    void moveInit();
+    void setWalkArmEnabled(in boolean leftArmEnable, in boolean rightArmEnable);
+    BoolArray getWalkArmEnabled();
+
+    FloatArray getPosition(in string name, in long space, in boolean useSensors);
+    void setPosition(in string name, in long space, in FloatArray position, in float fractionMaxSpeed, in long axisMask);
+    void setTransform(in string name, in long space, in FloatArray transform, in float fractionMaxSpeed, in long axisMask);
+    FloatArray getTransform(in string name, in long space, in boolean useSensorValues);
+  };
+
+  interface ALTextToSpeech {
+    void say(in string stringToSay);
+    void setVolume(in float volume);
+    float getVolume();
+    void setLanguage(in string language);
+    string getLanguage();
+    StringArray getAvailableLanguages();
+  };
+
+  interface ALBehaviorManager {
+    StringArray getInstalledBehaviors();
+    StringArray getRunningBehaviors();
+    boolean isBehaviorInstalled(in string name);
+    boolean isBehaviorRunning(in string name);
+    void runBehavior(in string name);
+    void stopAllBehaviors();
+    void stopBehavior(in string name);
+  };
+
+  interface ALMemory {
+    void insertLongData(in string name, in long value);
+    void insertFloatData(in string name, in long value);
+    void insertStringData(in string name, in string value);
+    void insertoLongArrayData(in string name, in LongArray value);
+    void insertoFloatArrayData(in string name, in FloatArray value);
+    void insertoStringArrayData(in string name, in StringArray value);
+
+    long getLongData(in string name);
+    float getFloatData(in string name);
+    string getStringData(in string name);
+    LongArray getLongArrayData(in string name);
+    FloatArray getFloatArrayData(in string name);
+    StringArray getStringArrayData(in string name);
+  };
+
+  interface ALVideoDevice {
+    long getCameraModel(in long index);
+    long getFrameRate(in long index);
+    long getResolution(in long index);
+    long getColorSpace(in long index);
+    boolean setCameraParameter(in long id, in long value);
+    long getCameraParameter(in long id);
+    boolean setCameraParameterToDefault(in long id);
+  };
+
+  interface ALLeds {
+    void fade(in string name, in float intensity, in float duration);
+    void fadeRGB(in string name, in long rgb, in float duration);
+  };
+
+};
