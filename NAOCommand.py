@@ -19,7 +19,6 @@ import OpenRTM_aist
 
 import NAO_idl
 
-
 # Import Service implementation class
 # <rtc-template block="service_impl">
 
@@ -34,7 +33,9 @@ import ssr, ssr__POA
 import ssr, ssr__POA
 import ssr, ssr__POA
 
+
 # </rtc-template>
+
 
 # This module's spesification
 # <rtc-template block="module_spec">
@@ -65,24 +66,37 @@ class NAOCommand(OpenRTM_aist.DataFlowComponentBase):
 	def __init__(self, manager):
 		OpenRTM_aist.DataFlowComponentBase.__init__(self, manager)
 
-        """
-        """
-        self._NAO_motionSrvPort = OpenRTM_aist.CorbaPort("NAO_motion")
-        self._NAO_speechSrvPort = OpenRTM_aist.CorbaPort("NAO_speech")
+        	"""
+        	"""
+        	self._NAO_motionSrvPort = OpenRTM_aist.CorbaPort("NAO_motion")
 
-        """
-        """
-        self._motion = OpenRTM_aist.CorbaConsumer(interfaceType=ssr.ALMotion)
-        self._textToSpeech = OpenRTM_aist.CorbaConsumer(interfaceType=ssr.ALTextToSpeech)
-	self._behaviorManager = OpenRTM_aist.CorbaConsumer(interfaceType==ssr.ALBehaviorManager)
-	# self._videoDevice = OpenRTM_aist.CorbaConsumer(interfaceType=ssr.ALVideoDevice)
-	# self._memory = OpenRTM_aist.CorbaConsumer(interfaceType=ssr.ALMemory)
-	# self._leds = OpenRTM_aist.CorbaConsumer(interfaceType=ssr.ALLeds)
+                self._NAO_speechSrvPort = OpenRTM_aist.CorbaPort("NAO_speech")
+
+        	
+		"""
+		"""
+ 		self._motion = OpenRTM_aist.CorbaConsumer(interfaceType=ssr.ALMotion)
+		"""
+		"""
+	        self._textToSpeech = OpenRTM_aist.CorbaConsumer(interfaceType=ssr.ALTextToSpeech)
+		"""
+		"""
+		#self._behaviorManager = OpenRTM_aist.CorbaConsumer(interfaceType=ssr.ALBehaviorManager)
+		"""
+		"""
+		self._videoDevice = OpenRTM_aist.CorbaConsumer(interfaceType=ssr.ALVideoDevice)
+		"""
+		"""
+		self._memory = OpenRTM_aist.CorbaConsumer(interfaceType=ssr.ALMemory)
+		"""
+		"""
+		self._leds = OpenRTM_aist.CorbaConsumer(interfaceType=ssr.ALLeds)
 
 		# initialize of configuration-data.
 		# <rtc-template block="init_conf_param">
 		
 		# </rtc-template>
+
 
 
 		 
@@ -105,7 +119,7 @@ class NAOCommand(OpenRTM_aist.DataFlowComponentBase):
 		
 		# Set service consumers to Ports
 		
-		self._NAO_motionSrvPort.registerConsumer("ALMoion", "ssr::ALMotion", self._motion)
+		self._NAO_motionSrvPort.registerConsumer("ALMotion", "ssr::ALMotion", self._motion)
 		self._NAO_speechSrvPort.registerConsumer("ALTextToSpeech", "ssr::ALTextToSpeech", self._textToSpeech)
 
 		# Set CORBA Service Ports
@@ -213,14 +227,14 @@ closeHand : Close its right hand
 			cmds = c.split()
 
 			if cmds[0] == "help":
-				self.showhelp()
+				self.show_help()
 			elif cmds[0] == "say":
 				text = ""
 				for c in cmds[1:]:
 					text = text + " " + c
 				self._textToSpeech._ptr().say(text)
-			elif cmds[0] == "behave":
-				self._behaviorManager._ptr().runBehavior(cmds[1])
+			#elif cmds[0] == "behave":
+			#	self._behaviorManager._ptr().runBehavior(cmds[1])
 			elif cmds[0] == "stop":
 				self._motion._ptr().stopMove()
 			elif cmds[0] == "moveToward":
@@ -236,9 +250,9 @@ closeHand : Close its right hand
 					z = float(cmds[3])
 					self._motion._ptr().moveTo(x, y, z)
 			elif cmds[0] == "shakeHead":
-				self._motion._ptr().setAngles(["HeadYaw", "HeadPitch"], [0.2, -0.2], 0.2)
+				#self._motion._ptr().setAngles(["HeadYaw", "HeadPitch"], [0.2, -0.2], 0.2)
 				time.sleep(1.0)
-				# self._motion._ptr().setAngles(["HeadYaw"], [-1.0], 1.0)
+				self._motion._ptr().setAngles(["HeadYaw"], [-1.0], 1.0)
 			elif cmds[0] == "openHand":
 				self._motion._ptr().openHand("RHand")
 			elif cmds[0] == "closeHand":
