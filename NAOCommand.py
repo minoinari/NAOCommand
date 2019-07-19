@@ -251,6 +251,7 @@ closeHand : Close its right hand
 					z = float(cmds[3])
 					self._motion._ptr().moveTo(x, y, z)
 			elif cmds[0] == "shakeHead":
+				self._motion._ptr().setStiffness(ssr.StringArray(["HeadYaw", "HeadPitch"]), ssr.FloatArray([0.8, 0.7]))
 				self._motion._ptr().setAngles(ssr.StringArray(["HeadYaw", "HeadPitch"]), ssr.FloatArray([0.2, -0.2]), 0.8)
 				time.sleep(1.0)
 				self._motion._ptr().setAngles(ssr.StringArray(["HeadYaw"]), ssr.FloatArray([-0.2]), 0.8)
