@@ -1,29 +1,277 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<rtc:RtcProfile rtc:version="0.2" rtc:id="RTC:M.Toyoda:Category:NAOCommand:1.0.0" xmlns:rtc="http://www.openrtp.org/namespaces/rtc" xmlns:rtcExt="http://www.openrtp.org/namespaces/rtc_ext" xmlns:rtcDoc="http://www.openrtp.org/namespaces/rtc_doc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <rtc:BasicInfo xsi:type="rtcExt:basic_info_ext" rtcExt:saveProject="NAOCommand" rtc:updateDate="2019-07-17T17:31:17+09:00" rtc:creationDate="2019-07-17T17:31:17+09:00" rtc:version="1.0.0" rtc:vendor="M.Toyoda" rtc:maxInstances="1" rtc:executionType="PeriodicExecutionContext" rtc:executionRate="1000.0" rtc:description="Enter commands" rtc:category="Category" rtc:componentKind="DataFlowComponent" rtc:activityType="PERIODIC" rtc:componentType="STATIC" rtc:name="NAOCommand">
-        <rtcExt:VersionUpLogs></rtcExt:VersionUpLogs>
-    </rtc:BasicInfo>
-    <rtc:Actions>
-        <rtc:OnInitialize xsi:type="rtcDoc:action_status_doc" rtc:implemented="true"/>
-        <rtc:OnFinalize xsi:type="rtcDoc:action_status_doc" rtc:implemented="false"/>
-        <rtc:OnStartup xsi:type="rtcDoc:action_status_doc" rtc:implemented="false"/>
-        <rtc:OnShutdown xsi:type="rtcDoc:action_status_doc" rtc:implemented="false"/>
-        <rtc:OnActivated xsi:type="rtcDoc:action_status_doc" rtc:implemented="false"/>
-        <rtc:OnDeactivated xsi:type="rtcDoc:action_status_doc" rtc:implemented="false"/>
-        <rtc:OnAborting xsi:type="rtcDoc:action_status_doc" rtc:implemented="false"/>
-        <rtc:OnError xsi:type="rtcDoc:action_status_doc" rtc:implemented="false"/>
-        <rtc:OnReset xsi:type="rtcDoc:action_status_doc" rtc:implemented="false"/>
-        <rtc:OnExecute xsi:type="rtcDoc:action_status_doc" rtc:implemented="true"/>
-        <rtc:OnStateUpdate xsi:type="rtcDoc:action_status_doc" rtc:implemented="false"/>
-        <rtc:OnRateChanged xsi:type="rtcDoc:action_status_doc" rtc:implemented="false"/>
-        <rtc:OnAction xsi:type="rtcDoc:action_status_doc" rtc:implemented="false"/>
-        <rtc:OnModeChanged xsi:type="rtcDoc:action_status_doc" rtc:implemented="false"/>
-    </rtc:Actions>
-    <rtc:ServicePorts xsi:type="rtcExt:serviceport_ext" rtcExt:position="RIGHT" rtc:name="NAO_motion">
-        <rtcDoc:Doc rtcDoc:ifdescription="" rtcDoc:description="commands about motion"/>
-    </rtc:ServicePorts>
-    <rtc:ServicePorts xsi:type="rtcExt:serviceport_ext" rtcExt:position="RIGHT" rtc:name="NAO_speech">
-        <rtcDoc:Doc rtcDoc:ifdescription="" rtcDoc:description="commands for talking"/>
-    </rtc:ServicePorts>
-    <rtc:Language xsi:type="rtcExt:language_ext" rtc:kind="Python"/>
-</rtc:RtcProfile>
+<rts:RtsProfile rts:updateDate="2019-07-19T12:34:07+09:00" rts:creationDate="2019-07-19T12:34:07+09:00" rts:version="0.2" rts:id="RTSystem:m.toyoda:NAOcommandSystem:1.0" xmlns:rtsExt="http://www.openrtp.org/namespaces/rts_ext" xmlns:rts="http://www.openrtp.org/namespaces/rts" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <rts:Components xsi:type="rtsExt:component_ext" rts:isRequired="true" rts:compositeType="None" rts:activeConfigurationSet="default" rts:instanceName="NAO_python0" rts:pathUri="localhost/NAO_python0.rtc" rts:id="RTC:Ogata Lab Waseda Univ.:Humanoid:NAO_python:1.0.2">
+        <rts:DataPorts xsi:type="rtsExt:dataport_ext" rts:name="NAO_python0.camera">
+            <rtsExt:Properties rtsExt:value="DataOutPort" rtsExt:name="port.port_type"/>
+            <rtsExt:Properties rtsExt:value="IDL:RTC/CameraImage:1.0" rtsExt:name="dataport.data_type"/>
+            <rtsExt:Properties rtsExt:value="flush, new, periodic" rtsExt:name="dataport.subscription_type"/>
+            <rtsExt:Properties rtsExt:value="push, pull" rtsExt:name="dataport.dataflow_type"/>
+            <rtsExt:Properties rtsExt:value="corba_cdr" rtsExt:name="dataport.interface_type"/>
+        </rts:DataPorts>
+        <rts:DataPorts xsi:type="rtsExt:dataport_ext" rts:name="NAO_python0.audio">
+            <rtsExt:Properties rtsExt:value="DataOutPort" rtsExt:name="port.port_type"/>
+            <rtsExt:Properties rtsExt:value="IDL:RTC/TimedOctetSeq:1.0" rtsExt:name="dataport.data_type"/>
+            <rtsExt:Properties rtsExt:value="flush, new, periodic" rtsExt:name="dataport.subscription_type"/>
+            <rtsExt:Properties rtsExt:value="push, pull" rtsExt:name="dataport.dataflow_type"/>
+            <rtsExt:Properties rtsExt:value="corba_cdr" rtsExt:name="dataport.interface_type"/>
+        </rts:DataPorts>
+        <rts:DataPorts xsi:type="rtsExt:dataport_ext" rts:name="NAO_python0.currentJointAngle">
+            <rtsExt:Properties rtsExt:value="DataOutPort" rtsExt:name="port.port_type"/>
+            <rtsExt:Properties rtsExt:value="IDL:RTC/TimedDoubleSeq:1.0" rtsExt:name="dataport.data_type"/>
+            <rtsExt:Properties rtsExt:value="flush, new, periodic" rtsExt:name="dataport.subscription_type"/>
+            <rtsExt:Properties rtsExt:value="push, pull" rtsExt:name="dataport.dataflow_type"/>
+            <rtsExt:Properties rtsExt:value="corba_cdr" rtsExt:name="dataport.interface_type"/>
+        </rts:DataPorts>
+        <rts:DataPorts xsi:type="rtsExt:dataport_ext" rts:name="NAO_python0.currentPose">
+            <rtsExt:Properties rtsExt:value="DataOutPort" rtsExt:name="port.port_type"/>
+            <rtsExt:Properties rtsExt:value="IDL:RTC/TimedPose2D:1.0" rtsExt:name="dataport.data_type"/>
+            <rtsExt:Properties rtsExt:value="flush, new, periodic" rtsExt:name="dataport.subscription_type"/>
+            <rtsExt:Properties rtsExt:value="push, pull" rtsExt:name="dataport.dataflow_type"/>
+            <rtsExt:Properties rtsExt:value="corba_cdr" rtsExt:name="dataport.interface_type"/>
+        </rts:DataPorts>
+        <rts:DataPorts xsi:type="rtsExt:dataport_ext" rts:name="NAO_python0.bumper">
+            <rtsExt:Properties rtsExt:value="DataOutPort" rtsExt:name="port.port_type"/>
+            <rtsExt:Properties rtsExt:value="IDL:RTC/TimedBooleanSeq:1.0" rtsExt:name="dataport.data_type"/>
+            <rtsExt:Properties rtsExt:value="flush, new, periodic" rtsExt:name="dataport.subscription_type"/>
+            <rtsExt:Properties rtsExt:value="push, pull" rtsExt:name="dataport.dataflow_type"/>
+            <rtsExt:Properties rtsExt:value="corba_cdr" rtsExt:name="dataport.interface_type"/>
+        </rts:DataPorts>
+        <rts:DataPorts xsi:type="rtsExt:dataport_ext" rts:name="NAO_python0.touch">
+            <rtsExt:Properties rtsExt:value="DataOutPort" rtsExt:name="port.port_type"/>
+            <rtsExt:Properties rtsExt:value="IDL:RTC/TimedBooleanSeq:1.0" rtsExt:name="dataport.data_type"/>
+            <rtsExt:Properties rtsExt:value="flush, new, periodic" rtsExt:name="dataport.subscription_type"/>
+            <rtsExt:Properties rtsExt:value="push, pull" rtsExt:name="dataport.dataflow_type"/>
+            <rtsExt:Properties rtsExt:value="corba_cdr" rtsExt:name="dataport.interface_type"/>
+        </rts:DataPorts>
+        <rts:DataPorts xsi:type="rtsExt:dataport_ext" rts:name="NAO_python0.sonar">
+            <rtsExt:Properties rtsExt:value="DataOutPort" rtsExt:name="port.port_type"/>
+            <rtsExt:Properties rtsExt:value="IDL:RTC/TimedBooleanSeq:1.0" rtsExt:name="dataport.data_type"/>
+            <rtsExt:Properties rtsExt:value="flush, new, periodic" rtsExt:name="dataport.subscription_type"/>
+            <rtsExt:Properties rtsExt:value="push, pull" rtsExt:name="dataport.dataflow_type"/>
+            <rtsExt:Properties rtsExt:value="corba_cdr" rtsExt:name="dataport.interface_type"/>
+        </rts:DataPorts>
+        <rts:DataPorts xsi:type="rtsExt:dataport_ext" rts:name="NAO_python0.velocity">
+            <rtsExt:Properties rtsExt:value="DataInPort" rtsExt:name="port.port_type"/>
+            <rtsExt:Properties rtsExt:value="IDL:RTC/TimedVelocity2D:1.0" rtsExt:name="dataport.data_type"/>
+            <rtsExt:Properties rtsExt:value="Any" rtsExt:name="dataport.subscription_type"/>
+            <rtsExt:Properties rtsExt:value="push, pull" rtsExt:name="dataport.dataflow_type"/>
+            <rtsExt:Properties rtsExt:value="corba_cdr" rtsExt:name="dataport.interface_type"/>
+        </rts:DataPorts>
+        <rts:DataPorts xsi:type="rtsExt:dataport_ext" rts:name="NAO_python0.targetJointAngle">
+            <rtsExt:Properties rtsExt:value="DataInPort" rtsExt:name="port.port_type"/>
+            <rtsExt:Properties rtsExt:value="IDL:RTC/TimedDoubleSeq:1.0" rtsExt:name="dataport.data_type"/>
+            <rtsExt:Properties rtsExt:value="Any" rtsExt:name="dataport.subscription_type"/>
+            <rtsExt:Properties rtsExt:value="push, pull" rtsExt:name="dataport.dataflow_type"/>
+            <rtsExt:Properties rtsExt:value="corba_cdr" rtsExt:name="dataport.interface_type"/>
+        </rts:DataPorts>
+        <rts:ServicePorts xsi:type="rtsExt:serviceport_ext" rts:name="NAO_python0.motion">
+            <rtsExt:Properties rtsExt:value="CorbaPort" rtsExt:name="port.port_type"/>
+        </rts:ServicePorts>
+        <rts:ServicePorts xsi:type="rtsExt:serviceport_ext" rts:name="NAO_python0.textToSpeech">
+            <rtsExt:Properties rtsExt:value="CorbaPort" rtsExt:name="port.port_type"/>
+        </rts:ServicePorts>
+        <rts:ServicePorts xsi:type="rtsExt:serviceport_ext" rts:name="NAO_python0.behaviorManager">
+            <rtsExt:Properties rtsExt:value="CorbaPort" rtsExt:name="port.port_type"/>
+        </rts:ServicePorts>
+        <rts:ServicePorts xsi:type="rtsExt:serviceport_ext" rts:name="NAO_python0.memory">
+            <rtsExt:Properties rtsExt:value="CorbaPort" rtsExt:name="port.port_type"/>
+        </rts:ServicePorts>
+        <rts:ServicePorts xsi:type="rtsExt:serviceport_ext" rts:name="NAO_python0.leds">
+            <rtsExt:Properties rtsExt:value="CorbaPort" rtsExt:name="port.port_type"/>
+        </rts:ServicePorts>
+        <rts:ServicePorts xsi:type="rtsExt:serviceport_ext" rts:name="NAO_python0.videoDevice">
+            <rtsExt:Properties rtsExt:value="CorbaPort" rtsExt:name="port.port_type"/>
+        </rts:ServicePorts>
+        <rts:ConfigurationSets rts:id="default">
+            <rts:ConfigurationData rts:data="192.168.170.194" rts:name="ipaddress"/>
+            <rts:ConfigurationData rts:data="9559" rts:name="port"/>
+            <rts:ConfigurationData rts:data="1" rts:name="debug"/>
+            <rts:ConfigurationData rts:data="0" rts:name="camera_id"/>
+            <rts:ConfigurationData rts:data="1" rts:name="num_channel"/>
+            <rts:ConfigurationData rts:data="1" rts:name="interleaved"/>
+            <rts:ConfigurationData rts:data="16000" rts:name="num_samples"/>
+            <rts:ConfigurationData rts:data="front" rts:name="channel_name"/>
+            <rts:ConfigurationData rts:data="1" rts:name="enable_camera"/>
+            <rts:ConfigurationData rts:data="1" rts:name="enable_audio"/>
+            <rts:ConfigurationData rts:data="0.1" rts:name="orthogonal_security_distance"/>
+            <rts:ConfigurationData rts:data="0.1" rts:name="tangential_security_distance"/>
+            <rts:ConfigurationData rts:data="HeadYaw, HeadPitch, LShoulderPitch, LShoulderRoll, LElbowYaw, LElbowRoll, LWristYaw, LHand, RShoulderPitch, RShoulderRoll, RElbowYaw, RElbowRoll, RWristYaw, RHand" rts:name="observing_body_names"/>
+            <rts:ConfigurationData rts:data="HeadYaw, HeadPitch, LShoulderPitch, LShoulderRoll, LElbowYaw, LElbowRoll, LWristYaw, LHand, RShoulderPitch, RShoulderRoll, RElbowYaw, RElbowRoll, RWristYaw, RHand" rts:name="controlling_body_names"/>
+            <rts:ConfigurationData rts:data="True" rts:name="enable_joint_angle_port"/>
+        </rts:ConfigurationSets>
+        <rts:ConfigurationSets rts:id="__widget__">
+            <rts:ConfigurationData rts:data="text" rts:name="ipaddress"/>
+            <rts:ConfigurationData rts:data="text" rts:name="port"/>
+            <rts:ConfigurationData rts:data="text" rts:name="debug"/>
+            <rts:ConfigurationData rts:data="radio" rts:name="camera_id"/>
+            <rts:ConfigurationData rts:data="radio" rts:name="num_channel"/>
+            <rts:ConfigurationData rts:data="radio" rts:name="interleaved"/>
+            <rts:ConfigurationData rts:data="text" rts:name="num_samples"/>
+            <rts:ConfigurationData rts:data="checkbox" rts:name="channel_name"/>
+            <rts:ConfigurationData rts:data="radio" rts:name="enable_camera"/>
+            <rts:ConfigurationData rts:data="radio" rts:name="enable_audio"/>
+        </rts:ConfigurationSets>
+        <rts:ConfigurationSets rts:id="__constraints__">
+            <rts:ConfigurationData rts:data="(0, 1)" rts:name="camera_id"/>
+            <rts:ConfigurationData rts:data="(1,2,4)" rts:name="num_channel"/>
+            <rts:ConfigurationData rts:data="(0, 1)" rts:name="interleaved"/>
+            <rts:ConfigurationData rts:data="(front, rear, left, right)" rts:name="channel_name"/>
+            <rts:ConfigurationData rts:data="(0, 1)" rts:name="enable_camera"/>
+            <rts:ConfigurationData rts:data="(0,1)" rts:name="enable_audio"/>
+        </rts:ConfigurationSets>
+        <rts:ExecutionContexts xsi:type="rtsExt:execution_context_ext" rts:rate="1000.0" rts:kind="PERIODIC" rts:id="0">
+            <rtsExt:Properties rtsExt:value="YES" rtsExt:name="sync_transition"/>
+            <rtsExt:Properties rtsExt:value="0.5" rtsExt:name="transition_timeout"/>
+            <rtsExt:Properties rtsExt:value="PeriodicExecutionContext" rtsExt:name="type"/>
+            <rtsExt:Properties rtsExt:value="1000.0" rtsExt:name="rate"/>
+        </rts:ExecutionContexts>
+        <rtsExt:Location rtsExt:direction="RIGHT" rtsExt:width="-1" rtsExt:height="-1" rtsExt:y="154" rtsExt:x="400"/>
+        <rtsExt:Properties rtsExt:value="NAO_python" rtsExt:name="implementation_id"/>
+        <rtsExt:Properties rtsExt:value="NAO_python" rtsExt:name="type_name"/>
+        <rtsExt:Properties rtsExt:value="NAO RT Component" rtsExt:name="description"/>
+        <rtsExt:Properties rtsExt:value="1.0.2" rtsExt:name="version"/>
+        <rtsExt:Properties rtsExt:value="Ogata Lab Waseda Univ." rtsExt:name="vendor"/>
+        <rtsExt:Properties rtsExt:value="Humanoid" rtsExt:name="category"/>
+        <rtsExt:Properties rtsExt:value="STATIC" rtsExt:name="activity_type"/>
+        <rtsExt:Properties rtsExt:value="1" rtsExt:name="max_instance"/>
+        <rtsExt:Properties rtsExt:value="Python" rtsExt:name="language"/>
+        <rtsExt:Properties rtsExt:value="SCRIPT" rtsExt:name="lang_type"/>
+        <rtsExt:Properties rtsExt:value="192.168.170.194" rtsExt:name="conf.default.ipaddress"/>
+        <rtsExt:Properties rtsExt:value="9559" rtsExt:name="conf.default.port"/>
+        <rtsExt:Properties rtsExt:value="1" rtsExt:name="conf.default.debug"/>
+        <rtsExt:Properties rtsExt:value="0" rtsExt:name="conf.default.camera_id"/>
+        <rtsExt:Properties rtsExt:value="1" rtsExt:name="conf.default.num_channel"/>
+        <rtsExt:Properties rtsExt:value="1" rtsExt:name="conf.default.interleaved"/>
+        <rtsExt:Properties rtsExt:value="16000" rtsExt:name="conf.default.num_samples"/>
+        <rtsExt:Properties rtsExt:value="front" rtsExt:name="conf.default.channel_name"/>
+        <rtsExt:Properties rtsExt:value="1" rtsExt:name="conf.default.enable_camera"/>
+        <rtsExt:Properties rtsExt:value="1" rtsExt:name="conf.default.enable_audio"/>
+        <rtsExt:Properties rtsExt:value="0.1" rtsExt:name="conf.default.orthogonal_security_distance"/>
+        <rtsExt:Properties rtsExt:value="0.1" rtsExt:name="conf.default.tangential_security_distance"/>
+        <rtsExt:Properties rtsExt:value="HeadYaw, HeadPitch, LShoulderPitch, LShoulderRoll, LElbowYaw, LElbowRoll, LWristYaw, LHand, RShoulderPitch, RShoulderRoll, RElbowYaw, RElbowRoll, RWristYaw, RHand" rtsExt:name="conf.default.observing_body_names"/>
+        <rtsExt:Properties rtsExt:value="HeadYaw, HeadPitch, LShoulderPitch, LShoulderRoll, LElbowYaw, LElbowRoll, LWristYaw, LHand, RShoulderPitch, RShoulderRoll, RElbowYaw, RElbowRoll, RWristYaw, RHand" rtsExt:name="conf.default.controlling_body_names"/>
+        <rtsExt:Properties rtsExt:value="True" rtsExt:name="conf.default.enable_joint_angle_port"/>
+        <rtsExt:Properties rtsExt:value="text" rtsExt:name="conf.__widget__.ipaddress"/>
+        <rtsExt:Properties rtsExt:value="text" rtsExt:name="conf.__widget__.port"/>
+        <rtsExt:Properties rtsExt:value="text" rtsExt:name="conf.__widget__.debug"/>
+        <rtsExt:Properties rtsExt:value="radio" rtsExt:name="conf.__widget__.camera_id"/>
+        <rtsExt:Properties rtsExt:value="radio" rtsExt:name="conf.__widget__.num_channel"/>
+        <rtsExt:Properties rtsExt:value="radio" rtsExt:name="conf.__widget__.interleaved"/>
+        <rtsExt:Properties rtsExt:value="text" rtsExt:name="conf.__widget__.num_samples"/>
+        <rtsExt:Properties rtsExt:value="checkbox" rtsExt:name="conf.__widget__.channel_name"/>
+        <rtsExt:Properties rtsExt:value="radio" rtsExt:name="conf.__widget__.enable_camera"/>
+        <rtsExt:Properties rtsExt:value="radio" rtsExt:name="conf.__widget__.enable_audio"/>
+        <rtsExt:Properties rtsExt:value="(0, 1)" rtsExt:name="conf.__constraints__.camera_id"/>
+        <rtsExt:Properties rtsExt:value="(1,2,4)" rtsExt:name="conf.__constraints__.num_channel"/>
+        <rtsExt:Properties rtsExt:value="(0, 1)" rtsExt:name="conf.__constraints__.interleaved"/>
+        <rtsExt:Properties rtsExt:value="(front, rear, left, right)" rtsExt:name="conf.__constraints__.channel_name"/>
+        <rtsExt:Properties rtsExt:value="(0, 1)" rtsExt:name="conf.__constraints__.enable_camera"/>
+        <rtsExt:Properties rtsExt:value="(0,1)" rtsExt:name="conf.__constraints__.enable_audio"/>
+        <rtsExt:Properties rtsExt:value="" rtsExt:name="sdo.service.provider.available_services"/>
+        <rtsExt:Properties rtsExt:value="" rtsExt:name="sdo.service.consumer.available_services"/>
+        <rtsExt:Properties rtsExt:value="1.1.0" rtsExt:name="config.version"/>
+        <rtsExt:Properties rtsExt:value="OpenRTM-aist-1.1.0" rtsExt:name="openrtm.name"/>
+        <rtsExt:Properties rtsExt:value="1.1.0" rtsExt:name="openrtm.version"/>
+        <rtsExt:Properties rtsExt:value="" rtsExt:name="os.name"/>
+        <rtsExt:Properties rtsExt:value="" rtsExt:name="os.release"/>
+        <rtsExt:Properties rtsExt:value="" rtsExt:name="os.version"/>
+        <rtsExt:Properties rtsExt:value="" rtsExt:name="os.arch"/>
+        <rtsExt:Properties rtsExt:value="" rtsExt:name="os.hostname"/>
+        <rtsExt:Properties rtsExt:value="" rtsExt:name="corba.endpoint"/>
+        <rtsExt:Properties rtsExt:value="omniORB" rtsExt:name="corba.id"/>
+        <rtsExt:Properties rtsExt:value="PeriodicExecutionContext" rtsExt:name="exec_cxt.periodic.type"/>
+        <rtsExt:Properties rtsExt:value="1000.0" rtsExt:name="exec_cxt.periodic.rate"/>
+        <rtsExt:Properties rtsExt:value="YES" rtsExt:name="exec_cxt.sync_transition"/>
+        <rtsExt:Properties rtsExt:value="0.5" rtsExt:name="exec_cxt.transition_timeout"/>
+        <rtsExt:Properties rtsExt:value="YES" rtsExt:name="logger.enable"/>
+        <rtsExt:Properties rtsExt:value="NORMAL" rtsExt:name="logger.log_level"/>
+        <rtsExt:Properties rtsExt:value="YES" rtsExt:name="naming.enable"/>
+        <rtsExt:Properties rtsExt:value="corba" rtsExt:name="naming.type"/>
+        <rtsExt:Properties rtsExt:value="%n.rtc" rtsExt:name="naming.formats"/>
+        <rtsExt:Properties rtsExt:value="NAO_python0.rtc" rtsExt:name="naming.names"/>
+        <rtsExt:Properties rtsExt:value="NAO_python0" rtsExt:name="instance_name"/>
+        <rtsExt:Properties rtsExt:value="NAO_python.conf" rtsExt:name="config_file"/>
+        <rtsExt:Properties rtsExt:value="" rtsExt:name="port.inport.dataport"/>
+        <rtsExt:Properties rtsExt:value="" rtsExt:name="port.outport.dataport"/>
+        <rtsExt:Properties rtsExt:value="" rtsExt:name="port.corbaport."/>
+        <rtsExt:Properties rtsExt:value="" rtsExt:name="port.corba"/>
+        <rtsExt:Properties rtsExt:value="IOR:000000000000003549444c3a6f70656e72746d2e616973742e676f2e6a702f4f70656e52544d2f44617461466c6f77436f6d706f6e656e743a312e300000000000000001000000000000006800010200000000103139322e3136382e3137302e32313200fc5d00000000000efeaf2e315d000022f4000000000100000000000200000000000000080000000041545400000000010000001c00000000000100010000000105010001000101090000000100010109" rtsExt:name="IOR"/>
+    </rts:Components>
+    <rts:Components xsi:type="rtsExt:component_ext" rts:isRequired="true" rts:compositeType="None" rts:activeConfigurationSet="default" rts:instanceName="NAOCommand0" rts:pathUri="localhost/ogata-PC.host_cxt/NAOCommand0.rtc" rts:id="RTC:M.Toyoda:Category:NAOCommand:1.0.0">
+        <rts:ServicePorts xsi:type="rtsExt:serviceport_ext" rts:name="NAOCommand0.NAO_motion">
+            <rtsExt:Properties rtsExt:value="CorbaPort" rtsExt:name="port.port_type"/>
+        </rts:ServicePorts>
+        <rts:ServicePorts xsi:type="rtsExt:serviceport_ext" rts:name="NAOCommand0.NAO_speech">
+            <rtsExt:Properties rtsExt:value="CorbaPort" rtsExt:name="port.port_type"/>
+        </rts:ServicePorts>
+        <rts:ConfigurationSets rts:id="default"/>
+        <rts:ExecutionContexts xsi:type="rtsExt:execution_context_ext" rts:rate="1000.0" rts:kind="PERIODIC" rts:id="0">
+            <rtsExt:Properties rtsExt:value="YES" rtsExt:name="sync_transition"/>
+            <rtsExt:Properties rtsExt:value="0.5" rtsExt:name="transition_timeout"/>
+            <rtsExt:Properties rtsExt:value="PeriodicExecutionContext" rtsExt:name="type"/>
+            <rtsExt:Properties rtsExt:value="1000.0" rtsExt:name="rate"/>
+        </rts:ExecutionContexts>
+        <rtsExt:Location rtsExt:direction="RIGHT" rtsExt:width="-1" rtsExt:height="-1" rtsExt:y="264" rtsExt:x="161"/>
+        <rtsExt:Properties rtsExt:value="NAOCommand" rtsExt:name="implementation_id"/>
+        <rtsExt:Properties rtsExt:value="NAOCommand" rtsExt:name="type_name"/>
+        <rtsExt:Properties rtsExt:value="Enter commands" rtsExt:name="description"/>
+        <rtsExt:Properties rtsExt:value="1.0.0" rtsExt:name="version"/>
+        <rtsExt:Properties rtsExt:value="M.Toyoda" rtsExt:name="vendor"/>
+        <rtsExt:Properties rtsExt:value="Category" rtsExt:name="category"/>
+        <rtsExt:Properties rtsExt:value="STATIC" rtsExt:name="activity_type"/>
+        <rtsExt:Properties rtsExt:value="1" rtsExt:name="max_instance"/>
+        <rtsExt:Properties rtsExt:value="Python" rtsExt:name="language"/>
+        <rtsExt:Properties rtsExt:value="SCRIPT" rtsExt:name="lang_type"/>
+        <rtsExt:Properties rtsExt:value="" rtsExt:name="conf.default"/>
+        <rtsExt:Properties rtsExt:value="" rtsExt:name="sdo.service.provider.available_services"/>
+        <rtsExt:Properties rtsExt:value="" rtsExt:name="sdo.service.consumer.available_services"/>
+        <rtsExt:Properties rtsExt:value="1.1.0" rtsExt:name="config.version"/>
+        <rtsExt:Properties rtsExt:value="OpenRTM-aist-1.1.0" rtsExt:name="openrtm.name"/>
+        <rtsExt:Properties rtsExt:value="1.1.0" rtsExt:name="openrtm.version"/>
+        <rtsExt:Properties rtsExt:value="" rtsExt:name="os.name"/>
+        <rtsExt:Properties rtsExt:value="" rtsExt:name="os.release"/>
+        <rtsExt:Properties rtsExt:value="" rtsExt:name="os.version"/>
+        <rtsExt:Properties rtsExt:value="" rtsExt:name="os.arch"/>
+        <rtsExt:Properties rtsExt:value="" rtsExt:name="os.hostname"/>
+        <rtsExt:Properties rtsExt:value="" rtsExt:name="corba.endpoint"/>
+        <rtsExt:Properties rtsExt:value="omniORB" rtsExt:name="corba.id"/>
+        <rtsExt:Properties rtsExt:value="PeriodicExecutionContext" rtsExt:name="exec_cxt.periodic.type"/>
+        <rtsExt:Properties rtsExt:value="1000.0" rtsExt:name="exec_cxt.periodic.rate"/>
+        <rtsExt:Properties rtsExt:value="YES" rtsExt:name="exec_cxt.sync_transition"/>
+        <rtsExt:Properties rtsExt:value="0.5" rtsExt:name="exec_cxt.transition_timeout"/>
+        <rtsExt:Properties rtsExt:value="YES" rtsExt:name="logger.enable"/>
+        <rtsExt:Properties rtsExt:value="INFO" rtsExt:name="logger.log_level"/>
+        <rtsExt:Properties rtsExt:value="YES" rtsExt:name="naming.enable"/>
+        <rtsExt:Properties rtsExt:value="corba" rtsExt:name="naming.type"/>
+        <rtsExt:Properties rtsExt:value="%h.host_cxt/%n.rtc" rtsExt:name="naming.formats"/>
+        <rtsExt:Properties rtsExt:value="ogata-PC.host_cxt/NAOCommand0.rtc" rtsExt:name="naming.names"/>
+        <rtsExt:Properties rtsExt:value="NAOCommand0" rtsExt:name="instance_name"/>
+        <rtsExt:Properties rtsExt:value="NAOCommand.conf" rtsExt:name="config_file"/>
+        <rtsExt:Properties rtsExt:value="" rtsExt:name="port.corbaport."/>
+        <rtsExt:Properties rtsExt:value="" rtsExt:name="port.corba"/>
+        <rtsExt:Properties rtsExt:value="IOR:000000000000003549444c3a6f70656e72746d2e616973742e676f2e6a702f4f70656e52544d2f44617461466c6f77436f6d706f6e656e743a312e300000000000000001000000000000006800010200000000103139322e3136382e3137302e32313200fec900000000000efe9939315d00000d60000000000100000000000200000000000000080000000041545400000000010000001c00000000000100010000000105010001000101090000000100010109" rtsExt:name="IOR"/>
+    </rts:Components>
+    <rts:ServicePortConnectors xsi:type="rtsExt:serviceport_connector_ext" rts:name="NAOCommand0.NAO_motion_NAO_python0.motion" rts:connectorId="bdc39330-a9d5-11e9-b8cf-00a0c6000011">
+        <rts:sourceServicePort xsi:type="rtsExt:target_port_ext" rts:portName="NAOCommand0.NAO_motion" rts:instanceName="NAOCommand0" rts:componentId="RTC:M.Toyoda:Category:NAOCommand:1.0.0">
+            <rtsExt:Properties rtsExt:value="localhost/ogata-PC.host_cxt/NAOCommand0.rtc" rtsExt:name="COMPONENT_PATH_ID"/>
+        </rts:sourceServicePort>
+        <rts:targetServicePort xsi:type="rtsExt:target_port_ext" rts:portName="NAO_python0.motion" rts:instanceName="NAO_python0" rts:componentId="RTC:Ogata Lab Waseda Univ.:Humanoid:NAO_python:1.0.2">
+            <rtsExt:Properties rtsExt:value="localhost/NAO_python0.rtc" rtsExt:name="COMPONENT_PATH_ID"/>
+        </rts:targetServicePort>
+        <rtsExt:Properties rtsExt:value="strict" rtsExt:name="port.connection.strictness"/>
+        <rtsExt:Properties rtsExt:value="IOR:010000001500000049444c3a7373722f414c4d6f74696f6e3a312e300000000001000000000000006800000001010200100000003139322e3136382e3137302e323132005dfc00000e000000feaf2e315d000022f4000000001200000200000000000000080000000100000000545441010000001c00000001000000010001000100000001000105090101000100000009010100" rtsExt:name="NAO_python0.port.motion.provided.ssr::ALMotion.ALMotion"/>
+        <rtsExt:Properties rtsExt:value="IOR:010000001500000049444c3a7373722f414c4d6f74696f6e3a312e300000000001000000000000006800000001010200100000003139322e3136382e3137302e323132005dfc00000e000000feaf2e315d000022f4000000001200000200000000000000080000000100000000545441010000001c00000001000000010001000100000001000105090101000100000009010100" rtsExt:name="port.ssr::ALMotion.ALMotion"/>
+    </rts:ServicePortConnectors>
+    <rts:ServicePortConnectors xsi:type="rtsExt:serviceport_connector_ext" rts:name="NAOCommand0.NAO_speech_NAO_python0.textToSpeech" rts:connectorId="bf65f88f-a9d5-11e9-b1cd-00a0c6000011">
+        <rts:sourceServicePort xsi:type="rtsExt:target_port_ext" rts:portName="NAOCommand0.NAO_speech" rts:instanceName="NAOCommand0" rts:componentId="RTC:M.Toyoda:Category:NAOCommand:1.0.0">
+            <rtsExt:Properties rtsExt:value="localhost/ogata-PC.host_cxt/NAOCommand0.rtc" rtsExt:name="COMPONENT_PATH_ID"/>
+        </rts:sourceServicePort>
+        <rts:targetServicePort xsi:type="rtsExt:target_port_ext" rts:portName="NAO_python0.textToSpeech" rts:instanceName="NAO_python0" rts:componentId="RTC:Ogata Lab Waseda Univ.:Humanoid:NAO_python:1.0.2">
+            <rtsExt:Properties rtsExt:value="localhost/NAO_python0.rtc" rtsExt:name="COMPONENT_PATH_ID"/>
+        </rts:targetServicePort>
+        <rtsExt:Properties rtsExt:value="strict" rtsExt:name="port.connection.strictness"/>
+        <rtsExt:Properties rtsExt:value="IOR:010000001b00000049444c3a7373722f414c54657874546f5370656563683a312e30000001000000000000006800000001010200100000003139322e3136382e3137302e323132005dfc00000e000000feaf2e315d000022f4000000001300000200000000000000080000000100000000545441010000001c00000001000000010001000100000001000105090101000100000009010100" rtsExt:name="NAO_python0.port.textToSpeech.provided.ssr::ALTextToSpeech.ALTextToSpeech"/>
+        <rtsExt:Properties rtsExt:value="IOR:010000001b00000049444c3a7373722f414c54657874546f5370656563683a312e30000001000000000000006800000001010200100000003139322e3136382e3137302e323132005dfc00000e000000feaf2e315d000022f4000000001300000200000000000000080000000100000000545441010000001c00000001000000010001000100000001000105090101000100000009010100" rtsExt:name="port.ssr::ALTextToSpeech.ALTextToSpeech"/>
+    </rts:ServicePortConnectors>
+</rts:RtsProfile>
+

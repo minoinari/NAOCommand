@@ -11,6 +11,7 @@
 """
 import sys
 import time
+import numpy as np
 sys.path.append(".")
 
 # Import RTM module
@@ -250,9 +251,10 @@ closeHand : Close its right hand
 					z = float(cmds[3])
 					self._motion._ptr().moveTo(x, y, z)
 			elif cmds[0] == "shakeHead":
-				#self._motion._ptr().setAngles(["HeadYaw", "HeadPitch"], [0.2, -0.2], 0.2)
+				self._motion._ptr().setAngles(ssr.StringArray(["HeadYaw", "HeadPitch"]), ssr.FloatArray([0.2, -0.2]), 0.8)
 				time.sleep(1.0)
-				self._motion._ptr().setAngles(["HeadYaw"], [-1.0], 1.0)
+				self._motion._ptr().setAngles(ssr.StringArray(["HeadYaw"]), ssr.FloatArray([-0.2]), 0.8)
+				#self._motion._ptr().setAngles(ssr.StringArray(["RElbowYaw"]), ssr.FloatArray([-0.2]), 0.8)
 			elif cmds[0] == "openHand":
 				self._motion._ptr().openHand("RHand")
 			elif cmds[0] == "closeHand":
